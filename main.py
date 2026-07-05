@@ -1,11 +1,14 @@
+import asyncio
+try:
+    asyncio.get_running_loop()
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
 import os
 import base64
-
 # This recreates your session file automatically inside Render on boot
 if "SESSION_BASE64" in os.environ:
     with open("my_bulk_userbot.session", "wb") as f:
         f.write(base64.b64decode(os.environ["SESSION_BASE64"]))
-
 import asyncio
 import os
 import re
